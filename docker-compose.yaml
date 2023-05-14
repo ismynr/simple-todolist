@@ -6,22 +6,22 @@ services:
     restart: always
     environment:
       - MYSQL_ROOT_PASSWORD=123123
-      - MYSQL_DATABASE=contact-manager
+      - MYSQL_DATABASE=todolist
     ports:
       - 3306:3306
     volumes:
-      - contact-manager-mysql-data:/var/lib/mysql
-      - contact-manager-mysql-config:/etc/mysql
+      - todolist-mysql-data:/var/lib/mysql
+      - todolist-mysql-config:/etc/mysql
   node_backend:
     build:
       context: .
       dockerfile: Dockerfile
     restart: unless-stopped
     environment:
-      MYSQL_DBNAME: contact-manager
+      MYSQL_DBNAME: todolist
       MYSQL_USER: root
-      MYSQL_PASSWORD: 123123
-      MYSQL_HOST: db
+      MYSQL_PASSWORD: 
+      MYSQL_HOST: 3306
     volumes:
       - ./:/nodejs_hello
     ports:
@@ -30,5 +30,5 @@ services:
       - db
 
 volumes:
-  contact-manager-mysql-data:
-  contact-manager-mysql-config:
+  todolist-mysql-data:
+  todolist-mysql-config:
